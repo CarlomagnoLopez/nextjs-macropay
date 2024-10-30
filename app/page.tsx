@@ -1,6 +1,8 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import HockeyTeamList from './HockeyTeamList';
+// import Image from 'next/image'
+
 
 const people = [
   {
@@ -42,7 +44,7 @@ const userNavigation = [
   { name: 'Settings', href: '#' },
 ]
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
@@ -186,7 +188,6 @@ export default function Home() {
         </header>
         <main>
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            {/* Your content */}
             <HockeyTeamList people={people}></HockeyTeamList>
           </div>
         </main>
