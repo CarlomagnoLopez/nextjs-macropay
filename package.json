@@ -13,8 +13,8 @@
     "@heroicons/react": "^2.1.5",
     "@material-tailwind/html": "^2.3.2",
     "next": "15.0.2",
-    "react": "19.0.0-rc",
-    "react-dom": "19.0.0-rc"
+    "react": "19.0.0-rc-02c0e824-20241028",
+    "react-dom": "19.0.0-rc-02c0e824-20241028"
   },
   "devDependencies": {
     "@types/node": "^20",
