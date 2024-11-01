@@ -26,7 +26,7 @@ export default function TeamList() {
       method: 'DELETE',
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(() => {
         getData();
       });
   }
@@ -41,7 +41,7 @@ export default function TeamList() {
       },
     })
     .then((res) => res.json())
-    .then((data) => {
+    .then(() => {
       getData();
     });
   }

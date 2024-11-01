@@ -26,7 +26,7 @@ export default function DialogEdit(props: { editUser: any, item: any }) {
 
   const successEdit = () => {
 
-    let itemMem = {
+    const itemMem = {
       name:name,
       email:email,
       username:username
