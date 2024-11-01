@@ -17,21 +17,33 @@ export default function TeamList() {
     fetch('https://6724177d493fac3cf24d1935.mockapi.io/users')
       .then((res) => res.json())
       .then((data) => {
-        console.log("deleting user");
         setData(data);
       })
   }
 
-  const deleteUser = (value:any) => {
-    console.log('deleting')
+  const deleteUser = (value: any) => {
     fetch(`https://6724177d493fac3cf24d1935.mockapi.io/users/${value.id}`, {
       method: 'DELETE',
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         getData();
       });
+  }
+
+  const editUser = (value: any) => {
+ 
+    fetch(`https://6724177d493fac3cf24d1935.mockapi.io/users/${value.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(value),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      getData();
+    });
   }
 
   const changeLoading = (value: boolean) => {
@@ -47,6 +59,7 @@ export default function TeamList() {
         isLoading={isLoading}
         setIsLoading={changeLoading}
         deleteUser={deleteUser}
+        editUser={editUser}
       ></Table>}
     </ul>
   )

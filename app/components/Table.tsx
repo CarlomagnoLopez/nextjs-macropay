@@ -2,11 +2,12 @@
 'use client'
 
 import Dialog from "./Dialog";
+import DialogEdit from "./DialogEdit";
+import SkeletonProgress from "./SkeletonProgress";
 
 export default function Table(props: any) {
     const dataTable = props.data;
     const isLoading = props.isLoading;
-    console.log(dataTable)
     if (dataTable.length > 0 && isLoading) {
 
         props.setIsLoading()
@@ -14,9 +15,22 @@ export default function Table(props: any) {
     }
 
     if (isLoading) {
-        return (<div>{"loading..."}</div>)
+        return (
+            <><SkeletonProgress></SkeletonProgress><SkeletonProgress></SkeletonProgress><SkeletonProgress></SkeletonProgress></>
+
+        )
     }
 
+    const mergeData = (itemMem:any,itemCurrent:any) => {
+
+        const itemMerge = {...itemCurrent}
+        itemMerge.name = itemMem.name;
+        itemMerge.username = itemMem.username;
+        itemMerge.email = itemMem.email;
+
+        
+        props.editUser(itemMerge)
+    }
 
     return (
         <>
@@ -49,7 +63,7 @@ export default function Table(props: any) {
                     </thead>
                     <tbody>
                         {dataTable && dataTable.map((item: any, index: number) => {
-                            // console.log(item)
+        
                             return (<tr key={index} className="hover:bg-slate-50 border-b border-slate-200">
                                 <td className="p-4 py-5">
                                     <p className="block font-semibold text-sm text-slate-800">{item.name}</p>
@@ -62,17 +76,16 @@ export default function Table(props: any) {
                                 </td>
                                 <td className="p-4 py-5">
                                     <div className="block text-center">
-                                        <Dialog item={item} deleteUser={() => props.deleteUser(item)}></Dialog>
-                                        {/* <button 
-                                        
-                                        onClick={() => deleteUser(item)}
-                                        className="rounded-md border border-slate-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
-                                            Borrar
-                                        </button> */}
+                                        <Dialog
+                                            item={item}
+                                            deleteUser={() => props.deleteUser(item)}>
+                                        </Dialog>
                                         <span>{' '}</span>
-                                        <button className="rounded-md border border-slate-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
-                                            Editar
-                                        </button>
+                                        <DialogEdit
+                                            item={item}
+                                            editUser={mergeData}>
+                                            {/* editUserTable={() => props.editUserTable(item)}> */}
+                                        </DialogEdit>
                                     </div>
                                 </td>
                             </tr>)
