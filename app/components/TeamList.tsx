@@ -22,7 +22,7 @@ export default function TeamList() {
       })
   }
 
-  const deleteUser = (value:object) => {
+  const deleteUser = (value:any) => {
     console.log('deleting')
     fetch(`https://6724177d493fac3cf24d1935.mockapi.io/users/${value.id}`, {
       method: 'DELETE',
