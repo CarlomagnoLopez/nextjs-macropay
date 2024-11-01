@@ -1,8 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export default function Table(props:any) {
+'use client'
+
+import Dialog from "./Dialog";
+
+export default function Table(props: any) {
     const dataTable = props.data;
     const isLoading = props.isLoading;
+    console.log(dataTable)
     if (dataTable.length > 0 && isLoading) {
+
         props.setIsLoading()
         return <></>
     }
@@ -10,6 +16,7 @@ export default function Table(props:any) {
     if (isLoading) {
         return (<div>{"loading..."}</div>)
     }
+
 
     return (
         <>
@@ -55,9 +62,13 @@ export default function Table(props:any) {
                                 </td>
                                 <td className="p-4 py-5">
                                     <div className="block text-center">
-                                        <button className="rounded-md border border-slate-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+                                        <Dialog item={item} deleteUser={() => props.deleteUser(item)}></Dialog>
+                                        {/* <button 
+                                        
+                                        onClick={() => deleteUser(item)}
+                                        className="rounded-md border border-slate-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
                                             Borrar
-                                        </button>
+                                        </button> */}
                                         <span>{' '}</span>
                                         <button className="rounded-md border border-slate-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
                                             Editar

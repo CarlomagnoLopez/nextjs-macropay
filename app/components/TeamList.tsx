@@ -10,18 +10,31 @@ export default function TeamList() {
   const [data, setData] = useState({})
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        // 
-        // console.log(isLoading)
-// 
-      })
+    getData();;
   }, [])
 
-  const changeLoading = (value:boolean) => {
-    console.log('change')
+  const getData = () => {
+    fetch('https://6724177d493fac3cf24d1935.mockapi.io/users')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("deleting user");
+        setData(data);
+      })
+  }
+
+  const deleteUser = (value:object) => {
+    console.log('deleting')
+    fetch(`https://6724177d493fac3cf24d1935.mockapi.io/users/${value.id}`, {
+      method: 'DELETE',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        getData();
+      });
+  }
+
+  const changeLoading = (value: boolean) => {
     setIsLoading(value)
   }
 
@@ -29,7 +42,12 @@ export default function TeamList() {
 
   return (
     <ul className="divide-y divide-gray-200">
-      {data && <Table data={data} isLoading={isLoading} setIsLoading={changeLoading}></Table>}
+      {data && <Table
+        data={data}
+        isLoading={isLoading}
+        setIsLoading={changeLoading}
+        deleteUser={deleteUser}
+      ></Table>}
     </ul>
   )
 }
